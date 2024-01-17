@@ -23,8 +23,8 @@ public class LectorPartidas {
 			jugadores = bf.readLine();
 			partida.setJugadores(jugadores);
 			while((linea = bf.readLine()) != null) {
-				linea = linea.substring(linea.indexOf(" "));
-				partida.getMovimientos();
+				linea = linea.substring(linea.indexOf(" ")+1);
+				partida.getMovimientos().add(linea);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
