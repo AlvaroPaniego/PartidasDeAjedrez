@@ -1,0 +1,44 @@
+Tenemos ficheros donde aparecen jugadas de partidas de ajedrez, haremos un seguimiento de dichas jugadas
+tablero 8*8 
+filas 1 - 8 columnas a - h
+cuadrado blanco siempre a a derecha del jugador
+Movimientos de las piezas:
+	Peon (No tiene pero vamos a utilzar E para mostralos por pantalla)
+		- 1 casilla hacia delante.
+		- Si esta en su posicion inicial puede moverse 2 casillas.
+		- Captura a las piezas que tiene en diagonal.
+		- No puede retroceder.
+	Torre (R)
+		- Movimientos de distancia ilimitada en horizontal o vertical.
+		- Puede capturar a las piezas que se encuentren en su vertical o horizontal.
+	Alfil (B)
+		- Movimientos de distancia ilimitada en diagonal.
+		- Uno en una casilla blanca y otra una casilla negra.
+		- Puede capturar a las piezas que se encuentren en su diagonal.
+	Rey (K)
+		- Movimientos de 1 casilla de distancia en todas las direcciones.
+		- Si una pieza amenza al Rey esta en jaque.
+		- Si el rey no se puede moverse a una casilla sin estar amenzado es jaque mate.
+		- Puede capturar a las piezas que se encuentren a una casilla en cualquier direccion.
+	Dama (Q)
+		- Movimientos de distancia ilimitada en cualquier direccion.
+		- Puede capturar a las piezas que se encuentren en cualquier direccion.
+	Caballo (N)
+		- 2 casillas en vertical o horizontal y una casilla hacia la izquierda o derecha.
+		- Puede saltar sobre otras piezas.
+		- Puede capturar a las piezas que se encuentren al final de su movimiento.
+	
+Letra de la pieza en mayuscula y letra de la columna en minuscula.
+0-0-0 es un enronque
+	- Enroque (0-0): con la torre mas cercana, el rey se mueve 2 casilas hacia la torre y la torre atraviesa al Rey.
+	- Enroque largo(0-0-0): con la torre mas lejana, el rey se mueve 3 casilas hacia la torre y la torre atraviesa al Rey.
+No se puede hacer un enronque si cualquiera de las piezas estan amenazadas o se han movido.
+
+
+Se pone la letra de la pieza y la coordenada a la que se mueve.
+Cunado una pieza captura a otra se indica con una x minuscula entre la letra de la pieza y la coordenada.
+Si dos piezas puende capturar la misma pieza se indica, despues de la letra de la pieza, con la coordenada de la que se ha movido.
+Esto ultimo solo ocurre con caballos y torres.
+Un + despues del movimiento de una pieza significa que esa pieza de jaque al rey enemigo.
+Si se da jaque mate se pone # despues del ultimo movimiento.
+Si las jugadas acaban abruptamente es porque un jugador ha abandonado o se ha acabado el tiempo.

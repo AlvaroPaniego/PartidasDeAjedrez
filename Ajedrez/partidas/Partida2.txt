@@ -1,0 +1,14 @@
+Boeges - Roche
+1. d4 d5
+2. Nc3 c6
+3. e4 dxe4
+4. Nxe4 Bf5
+5. Ng3 Bg6
+6. h4 h6
+7. Nf3 Nd7
+8. Bc4 e6
+9. Qe2 Bd6
+10. O-O Ngf6
+11. Ne5 Bh7
+12. Nxf7 Kxf7
+13. Qxe6+
