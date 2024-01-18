@@ -28,17 +28,24 @@ public class GestorMoviminetos {
 		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
-		int columnaFinalComparar = tr.charToInt(columnaFinal), columnaInicialComparar = tr.charToInt(columnaInicial) + 1;
+		int columnaFinalComparar = tr.charToInt(columnaFinal), columnaInicialComparar = tr.charToInt(columnaInicial);
 		seMueve = false;
 		String piezaMover = elegirPieza(pieza);
-		for (int fila = 0; fila < tablero.length; fila++) {
-			System.out.println(tablero[columnaInicialComparar][fila].getPieza());
-			if (tablero[columnaInicialComparar][fila].getPieza().equals(piezaMover)) {
+		System.out.println(piezaMover);
+		for (int fila = tablero.length-1; fila >= 0 ; fila++) {
+			System.out.println(tablero[fila][columnaInicialComparar].getPieza());
+			if (tablero[fila][columnaInicialComparar].getPieza().equals(piezaMover)) {
 				System.out.println("igual se mueve");
-				piezaAMover = tablero[columnaInicialComparar][fila].mover(columnaFinalComparar, columnaInicial, true);
+				piezaAMover = tablero[fila][columnaInicialComparar].mover(columnaFinalComparar, columnaInicial, true);
+				System.out.println(piezaAMover.getPieza());
 				if (piezaAMover != null) {
-					tablero[columnaInicialComparar][fila] = new Vacio("_", fila, columnaInicialComparar);
+					System.out.println("se puede mover");
+					System.out.println(fila + " " + columnaFinalComparar);
+					tablero[fila][columnaInicialComparar] = new Vacio("_", fila, columnaInicialComparar);
+					System.out.println(tablero[fila][columnaInicialComparar].getPieza());
 					tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
+					System.out.println(piezaAMover.getFila() + " " + piezaAMover.getColumna());
+					System.out.println(tablero[piezaAMover.getFila()][piezaAMover.getColumna()].getPieza());
 					seMueve = true;
 					turno = !turno;
 					System.out.println("Final mover pieza " + turno);
