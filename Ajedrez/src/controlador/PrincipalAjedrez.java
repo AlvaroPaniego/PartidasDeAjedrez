@@ -13,6 +13,7 @@ import vista.Consola;
 
 public class PrincipalAjedrez {
 	public static void main(String[] args) {
+		HashMap<Integer, Tablero> mapaMovimiento = new HashMap<>();
 		ArrayList<String> arrLFichero = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
 		Tablero tablero = new Tablero();
@@ -23,6 +24,7 @@ public class PrincipalAjedrez {
 		Pattern p = Pattern.compile("[a-h]");
 		Partida partida;
 		String[] dirPartidas = new File("partidas").list();
+		int numeroTurno = 1;
 		for (int i = 0; i < dirPartidas.length; i++) {
 			if (new File("partidas/" + dirPartidas[i]).isFile()) {
 				arrLFichero.add(dirPartidas[i]);
@@ -66,7 +68,7 @@ public class PrincipalAjedrez {
 			fila = fm.cogeFila(jugadas);
 			columna = fm.cogeColumna(jugadas);
 			if(patronColumnas.matcher(pieza).matches()) {
-				gm.peonCaptura("", fila, columna, pieza.charAt(0));
+				c.mostrarTablero(gm.peonCaptura("", fila, columna, pieza.charAt(0)));;
 				return;
 			}
 		}else {

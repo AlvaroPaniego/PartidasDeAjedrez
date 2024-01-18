@@ -15,7 +15,7 @@ public class Alfil extends Pieza{
 		int columnaInt = traductor.charToInt(columna);
 		System.out.println("Estoy moviendo un alfil");
 		
-		boolean mover = columnaInt + columna == super.getFila() + super.getColumna() || columnaInt - columna == super.getFila() - super.getColumna();
+		boolean mover = fila + columnaInt == super.getFila() + super.getColumna() || fila - columnaInt == super.getFila() - super.getColumna();
 		if(mover) {
 			System.out.println("Se puede mover");
 			super.setFila(fila);

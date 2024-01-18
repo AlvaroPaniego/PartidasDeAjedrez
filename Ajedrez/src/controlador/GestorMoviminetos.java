@@ -24,17 +24,20 @@ public class GestorMoviminetos {
 		this.tablero = tablero;
 	}
 
-	public Pieza[][] peonCaptura(String pieza, char filaFinal, int columnaFinal, char filaInicial) {
+	public Pieza[][] peonCaptura(String pieza, char columnaFinal, int filaFinal, char columnaInicial) {
 		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
-		int filaFinalComparar = tr.charToInt(filaFinal), filaInicialComparar = tr.charToInt(filaInicial);
+		int columnaFinalComparar = tr.charToInt(columnaFinal), columnaInicialComparar = tr.charToInt(columnaInicial) + 1;
 		seMueve = false;
-		for (int columna = 0; columna < tablero.length; columna++) {
-			if (Math.abs(filaInicialComparar - filaFinalComparar) == 1 && Math.abs(columnaFinal - columna) == 1) {
-				piezaAMover = tablero[filaInicialComparar][columna].mover(filaFinalComparar, filaInicial, true);
+		String piezaMover = elegirPieza(pieza);
+		for (int fila = 0; fila < tablero.length; fila++) {
+			System.out.println(tablero[columnaInicialComparar][fila].getPieza());
+			if (tablero[columnaInicialComparar][fila].getPieza().equals(piezaMover)) {
+				System.out.println("igual se mueve");
+				piezaAMover = tablero[columnaInicialComparar][fila].mover(columnaFinalComparar, columnaInicial, true);
 				if (piezaAMover != null) {
-					tablero[filaInicialComparar][columna] = new Vacio("_", columna, filaInicialComparar);
+					tablero[columnaInicialComparar][fila] = new Vacio("_", fila, columnaInicialComparar);
 					tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
 					seMueve = true;
 					turno = !turno;
