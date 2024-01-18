@@ -11,14 +11,14 @@ import modelo.Pieza;
 public class Consola {
 	Traductor tr = new Traductor();
 	public void mostrarTablero(Pieza[][] tablero) {
-		for (int fila = 0; fila < tablero.length; fila++) {
-			System.out.print(tr.intToChar(fila) + "   ");
+		for (int fila = tablero.length-1; fila >= 0 ; fila--) {
+			System.out.print((fila + 1) + "   ");
 			for (int columna = 0; columna < tablero.length; columna++) {
 				System.out.print(tablero[fila][columna].getPieza() + " ");
 			}
 			System.out.println();
 		}
-		System.out.println("\n    1 2 3 4 5 6 7 8");
+		System.out.println("\n    a b c d e f g h");
 	}
 	
 	public int menuSeleccionFichero(ArrayList<String> partidas) {

@@ -6,11 +6,11 @@ public class Tablero {
 	private Pieza[][] tablero = new Pieza[8][8];
 	public Tablero() {
 		Traductor tr = new Traductor();
-		int fila;
-		for (char f = 'a'; f < 'i'; f++) {
-			for (int columnas = 0; columnas < tablero.length; columnas++) {
-				fila = tr.charToInt(f);
-				colocarTablero(fila, columnas);
+		int c;
+		for (int fila = tablero.length-1; fila >= 0; fila--) {
+			for (char columna = 'a'; columna < 'i'; columna++) {
+				c = tr.charToInt(columna);
+				colocarTablero(fila, c);
 			}
 		}
 	}
@@ -26,22 +26,22 @@ public class Tablero {
 	private void colocarTablero(int filas, int columna) {
 		switch(filas) {
 		case 0:
-			colocarNoblezaNegras(columna, filas);
+			colocarNoblezaBlancas(columna, filas);
 			break;
 		case 1:
-			colocarPeones(columna, filas, false);
-			break;
-		case 6:
 			colocarPeones(columna, filas, true);
 			break;
+		case 6:
+			colocarPeones(columna, filas, false);
+			break;
 		case 7:
-			colocarNoblezaBlanca(columna, filas);
+			colocarNoblezaNegras(columna, filas);
 			break;
 		default:
 			tablero[filas][columna] = new Vacio("_", filas, columna);
 		}
 	}
-	private void colocarNoblezaBlanca(int columna, int filas) {
+	private void colocarNoblezaBlancas(int columna, int filas) {
 		switch(columna) {
 		case 0:
 		case 7:

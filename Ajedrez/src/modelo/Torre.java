@@ -8,16 +8,16 @@ public class Torre extends Pieza {
 	}
 
 	@Override
-	public Pieza mover(char fila, int columna, boolean capturar) {
+	public Pieza mover(int fila, char columna, boolean capturar) {
 		// TODO Gestionar el movimiento
 		Traductor traductor = new Traductor();
-		int filaInt = traductor.charToInt(fila);
-		boolean mover = super.getFila() == filaInt || super.getColumna() == columna;
+		int columnaInt = traductor.charToInt(columna);
+		boolean mover = super.getFila() == fila || super.getColumna() == columnaInt;
 		System.out.println("Estoy moviendo una torre");
 		if(mover) {
 			System.out.println("Se puede mover");
-			super.setFila(filaInt);
-			super.setColumna(columna);
+			super.setFila(fila);
+			super.setColumna(columnaInt);
 			
 			return this;
 		}

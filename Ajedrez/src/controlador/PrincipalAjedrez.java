@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import modelo.Partida;
 import modelo.Tablero;
@@ -18,6 +20,7 @@ public class PrincipalAjedrez {
 		LectorPartidas lp = new LectorPartidas();
 		Consola c = new Consola();
 		FiltradorMoviminetos fm = new FiltradorMoviminetos();
+		Pattern p = Pattern.compile("[a-h]");
 		Partida partida;
 		String[] dirPartidas = new File("partidas").list();
 		for (int i = 0; i < dirPartidas.length; i++) {
@@ -42,51 +45,39 @@ public class PrincipalAjedrez {
 				break;
 			}
 			if(turno) {
-				System.out.println(jugadas[0]);
-				if(!jugadas[0].contains("O")) {
-					pieza = fm.cogePieza(jugadas[0]);
-					fila = fm.cogeFila(jugadas[0]);
-					columna = fm.cogeColumna(jugadas[0]);
-				}else {
-					pieza = fm.cogePieza(jugadas[0]);
-					fila = 'i';
-					columna = -1;
-				}
+				movimientos(gm, c, fm, jugadas[0], p);
 				turno = !turno;
-				c.mostrarTablero(gm.moverPieza(pieza, fila, columna));
 			}else {
-				System.out.println(jugadas[1]);
-				if(!jugadas[1].contains("O")) {
-					pieza = fm.cogePieza(jugadas[1]);
-					fila = fm.cogeFila(jugadas[1]);
-					columna = fm.cogeColumna(jugadas[1]);
-				}else {
-					pieza = fm.cogePieza(jugadas[1]);
-					fila = 'i';
-					columna = -1;
-				}
+				movimientos(gm, c, fm, jugadas[1], p);
 				turno = !turno;
 				i++;
-				c.mostrarTablero(gm.moverPieza(pieza, fila, columna));
 			}
 			pasarTurno(scanner);
 		}
-//		c.mostrarTablero(gm.moverPieza("N", 'f', 3));
-//		System.out.println("Introduce un carácter para continuar");
-//		scanner.next();
-//		c.mostrarTablero(gm.moverPieza("", 'd', 1));
-//		System.out.println("Introduce un carácter para continuar");
-//		scanner.next();
-//		c.mostrarTablero(gm.moverPieza("N", 'f', 8));
-//		System.out.println("Introduce un carácter para continuar");
-//		scanner.next();
-//		c.mostrarTablero(gm.moverPieza("", 'e', 1));
-//		System.out.println("Introduce un carácter para continuar");
-//		scanner.next();
-//		c.mostrarTablero(gm.moverPieza("O-O-O", 'i', -1));
-
 	}
 
+	private static void movimientos(GestorMoviminetos gm, Consola c, FiltradorMoviminetos fm, String jugadas, Pattern patronColumnas) {
+		int columna;
+		String pieza;
+		char fila;
+		System.out.println(jugadas);
+		if(!jugadas.contains("O")) {
+			pieza = fm.cogePieza(jugadas);
+			fila = fm.cogeFila(jugadas);
+			columna = fm.cogeColumna(jugadas);
+			if(patronColumnas.matcher(pieza).matches()) {
+				gm.peonCaptura("", fila, columna, pieza.charAt(0));
+				return;
+			}
+		}else {
+			pieza = fm.cogePieza(jugadas);
+			fila = 'i';
+			columna = -1;
+		}
+		System.out.println(pieza + " " +fila + " " + columna);
+		c.mostrarTablero(gm.moverPieza(pieza, fila, columna));
+	}
+	
 	private static void pasarTurno(Scanner scanner) {
 		System.out.println("Introduce un carácter para continuar");
 		scanner.next();

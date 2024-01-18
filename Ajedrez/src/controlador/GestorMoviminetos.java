@@ -24,91 +24,103 @@ public class GestorMoviminetos {
 		this.tablero = tablero;
 	}
 
-	public Pieza[][] moverPiezaProvisional(char filaInicial, int columnaInicial, char filaFinal, int columnaFinal) {
-		Traductor tr = new Traductor();
-		Pieza piezaAMover;
-		int fila;
-		boolean puedeCapturar;
-		for (char f = 'a'; f < 'i'; f++) {
-			for (int columna = 0; columna < tablero.length; columna++) {
-				fila = tr.charToInt(f);
-				if (filaInicial == f && columnaInicial - 1 == columna) {
-					// Sutituir 'f' y 1 por los valores del fichero de jugadas
-					puedeCapturar = !tablero[filaFinal][columnaFinal - 1].getPieza().contains("_");
-					piezaAMover = tablero[fila][columna].mover(filaFinal, columnaFinal - 1, puedeCapturar);
-					if (piezaAMover == null) {
-						System.err.println("Jugada no valida");
-						return tablero;
-					}
-					tablero[fila][columna] = new Vacio("_", fila, columna);
-					tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
-				}
-			}
-		}
-		return tablero;
-	}
-
-	public Pieza[][] moverPieza(String pieza, char filaFinal, int columnaFinal) {
+	public Pieza[][] peonCaptura(String pieza, char filaFinal, int columnaFinal, char filaInicial) {
 		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
-		int fila, filaCapturar;
+		int filaFinalComparar = tr.charToInt(filaFinal), filaInicialComparar = tr.charToInt(filaInicial);
+		seMueve = false;
+		for (int columna = 0; columna < tablero.length; columna++) {
+			if (Math.abs(filaInicialComparar - filaFinalComparar) == 1 && Math.abs(columnaFinal - columna) == 1) {
+				piezaAMover = tablero[filaInicialComparar][columna].mover(filaFinalComparar, filaInicial, true);
+				if (piezaAMover != null) {
+					tablero[filaInicialComparar][columna] = new Vacio("_", columna, filaInicialComparar);
+					tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
+					seMueve = true;
+					turno = !turno;
+					System.out.println("Final mover pieza " + turno);
+					return tablero;
+				}
+			}
+		}
+//		for (char f = 'a'; f < 'i'; f++) {
+//			for (int columna = 0; columna < tablero.length; columna++) {
+//				fila = tr.charToInt(f);
+//			}
+//		}
+
+		turno = !turno;
+		System.out.println("Final mover pieza " + turno);
+		if (!seMueve) {
+			System.out.println(Colores.RED + "Jugada no valida" + Colores.RESET);
+		}
+		seMueve = false;
+		return tablero;
+	}
+
+	public Pieza[][] moverPieza(String pieza, char columnaFinal, int filaFinal) {
+		System.out.println("Inicio mover pieza " + turno);
+		Traductor tr = new Traductor();
+		Pieza piezaAMover;
+		int columna;
 		seMueve = false;
 		boolean puedeCapturar;
 		String piezaMover = elegirPieza(pieza);
 //		if(tableroObj.retaguardiaOcupada(turno)) {
 //			System.out.println("No se puede hacer el enroque");
 //		}
-		if((pieza.equals("O-O-O") && turno) || (pieza.equals("O-O") && !turno)) {
+		if ((pieza.equals("O-O-O") && turno) || (pieza.equals("O-O") && !turno)) {
 			saltarTorre = false;
-		}else if ((pieza.equals("O-O-O") && !turno) || (pieza.equals("O-O") && turno)){
+		} else if ((pieza.equals("O-O-O") && !turno) || (pieza.equals("O-O") && turno)) {
 			saltarTorre = true;
 		}
-		for (char f = 'a'; f < 'i'; f++) {
-			for (int columna = 0; columna < tablero.length; columna++) {
-				fila = tr.charToInt(f);
+		for (int f = tablero.length - 1; f >= 0; f--) {
+			for (char col = 'a'; col < 'i'; col++) {
+				puedeCapturar = false;
+				columna = tr.charToInt(col);
 				switch (piezaMover) {
 				case "O-O":
 					if (turno) {
-						if (tablero[fila][columna].getPieza().equals("K")) {
-							moverRey(fila, false, columna);
+						if (tablero[f][columna].getPieza().equals("K")) {
+							moverRey(columna, false, f);
 						}
-						if (tablero[fila][columna].getPieza().equals("R")) {
-							moverPrimeraTorre(fila, columna, false);
+						if (tablero[f][columna].getPieza().equals("R")) {
+							moverPrimeraTorre(columna, f, false);
 						}
 					} else {
-						if (tablero[fila][columna].getPieza().equals("k")) {
-							moverRey(fila, false, columna);
+						if (tablero[f][columna].getPieza().equals("k")) {
+							moverRey(columna, false, f);
 						}
-						if (tablero[fila][columna].getPieza().equals("r")) {
-							moverSegundaTorre(fila, columna, false);
+						if (tablero[f][columna].getPieza().equals("r")) {
+							moverSegundaTorre(columna, f, false);
 						}
 					}
 					break;
 				case "O-O-O":
 					if (turno) {
-						if (tablero[fila][columna].getPieza().equals("K")) {
-							moverRey(fila, true, columna);
+						if (tablero[f][columna].getPieza().equals("K")) {
+							moverRey(columna, true, f);
 						}
-						if (tablero[fila][columna].getPieza().equals("R")) {
-							moverSegundaTorre(fila, columna, true);
+						if (tablero[f][columna].getPieza().equals("R")) {
+							moverSegundaTorre(columna, f, true);
 						}
 					} else {
-						if (tablero[fila][columna].getPieza().equals("k")) {
-							moverRey(fila, true, columna);
+						if (tablero[f][columna].getPieza().equals("k")) {
+							moverRey(columna, true, f);
 						}
-						if (tablero[fila][columna].getPieza().equals("r")) {
-							moverPrimeraTorre(fila, columna, true);
+						if (tablero[f][columna].getPieza().equals("r")) {
+							moverPrimeraTorre(columna, f, true);
 						}
 					}
 					break;
 				default:
-					if (tablero[fila][columna].getPieza().equals(piezaMover)) {
-						filaCapturar = tr.charToInt(filaFinal);
-						puedeCapturar = !tablero[filaCapturar][columnaFinal - 1].getPieza().contains("_");
-						piezaAMover = tablero[fila][columna].mover(filaFinal, columnaFinal - 1, puedeCapturar);
+					if (tablero[f][columna].getPieza().equals(piezaMover)) {
+//						columnaCapturar = tr.charToInt(columnaFinal);
+//						System.out.println(columnaCapturar);
+//						puedeCapturar = !(tablero[filaFinal][columnaCapturar - 1].getPieza().contains("_") && tablero[filaFinal][columnaCapturar + 1].getPieza().contains("_"));
+						piezaAMover = tablero[f][columna].mover(filaFinal - 1, columnaFinal, puedeCapturar);
 						if (piezaAMover != null) {
-							tablero[fila][columna] = new Vacio("_", fila, columna);
+							tablero[f][columna] = new Vacio("_", columna, f);
 							tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
 							seMueve = true;
 							turno = !turno;
