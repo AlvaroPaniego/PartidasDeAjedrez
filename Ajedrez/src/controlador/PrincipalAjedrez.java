@@ -72,7 +72,7 @@ public class PrincipalAjedrez {
 				return;
 			}
 		}else {
-			pieza = fm.cogePieza(jugadas);
+			pieza = jugadas;
 			fila = 'i';
 			columna = -1;
 		}

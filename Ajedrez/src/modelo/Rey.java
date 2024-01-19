@@ -14,11 +14,10 @@ public class Rey extends Pieza {
 		int columnaInt = traductor.charToInt(columna);
 		System.out.println("Estoy moviendo un rey");
 		int v1 = fila - super.getFila(), v2 = columnaInt - super.getColumna();
-		boolean moverDiagonal = fila + columnaInt == super.getFila() + super.getColumna()
-				|| fila - columnaInt == super.getFila() - super.getColumna();
+		boolean diagonal = Math.abs(v1) == Math.abs(v2);
 		boolean moverRecto = super.getFila() == fila || super.getColumna() == columnaInt;
-		boolean distancia1 = Math.abs(v1) == 1 && Math.abs(v2) == 1;
-		if ((moverDiagonal || moverRecto) && distancia1) {
+		boolean distancia1 = Math.abs(v1) <= 1 && Math.abs(v2) <= 1;
+		if ((diagonal || moverRecto) && distancia1) {
 			System.out.println("Se puede mover");
 			super.setFila(fila);
 			super.setColumna(columnaInt);

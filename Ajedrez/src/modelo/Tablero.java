@@ -56,10 +56,10 @@ public class Tablero {
 			tablero[filas][columna] = new Alfil("B", true, filas, columna);
 			break;
 		case 3:
-			tablero[filas][columna] = new Rey("K", true, filas, columna);
+			tablero[filas][columna] = new Reina("Q", true, filas, columna);
 			break;
 		case 4:
-			tablero[filas][columna] = new Reina("Q", true, filas, columna);
+			tablero[filas][columna] = new Rey("K", true, filas, columna);
 			break;
 		}
 	}

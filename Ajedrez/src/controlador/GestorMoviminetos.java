@@ -31,13 +31,11 @@ public class GestorMoviminetos {
 		int columnaFinalComparar = tr.charToInt(columnaFinal), columnaInicialComparar = tr.charToInt(columnaInicial);
 		seMueve = false;
 		String piezaMover = elegirPieza(pieza);
-		System.out.println(piezaMover);
-		for (int fila = tablero.length-1; fila >= 0 ; fila++) {
+		for (int fila = tablero.length - 1; fila >= 0; fila--) {
 			System.out.println(tablero[fila][columnaInicialComparar].getPieza());
 			if (tablero[fila][columnaInicialComparar].getPieza().equals(piezaMover)) {
 				System.out.println("igual se mueve");
-				piezaAMover = tablero[fila][columnaInicialComparar].mover(columnaFinalComparar, columnaInicial, true);
-				System.out.println(piezaAMover.getPieza());
+				piezaAMover = tablero[fila][columnaInicialComparar].mover(filaFinal - 1, columnaFinal, true);
 				if (piezaAMover != null) {
 					System.out.println("se puede mover");
 					System.out.println(fila + " " + columnaFinalComparar);
@@ -53,12 +51,6 @@ public class GestorMoviminetos {
 				}
 			}
 		}
-//		for (char f = 'a'; f < 'i'; f++) {
-//			for (int columna = 0; columna < tablero.length; columna++) {
-//				fila = tr.charToInt(f);
-//			}
-//		}
-
 		turno = !turno;
 		System.out.println("Final mover pieza " + turno);
 		if (!seMueve) {
@@ -79,10 +71,10 @@ public class GestorMoviminetos {
 //		if(tableroObj.retaguardiaOcupada(turno)) {
 //			System.out.println("No se puede hacer el enroque");
 //		}
-		if ((pieza.equals("O-O-O") && turno) || (pieza.equals("O-O") && !turno)) {
-			saltarTorre = false;
-		} else if ((pieza.equals("O-O-O") && !turno) || (pieza.equals("O-O") && turno)) {
+		if ((pieza.equals("O-O-O"))) {
 			saltarTorre = true;
+		} else {
+			saltarTorre = false;
 		}
 		for (int f = tablero.length - 1; f >= 0; f--) {
 			for (char col = 'a'; col < 'i'; col++) {
@@ -92,14 +84,14 @@ public class GestorMoviminetos {
 				case "O-O":
 					if (turno) {
 						if (tablero[f][columna].getPieza().equals("K")) {
-							moverRey(columna, false, f);
+							moverRey(f, false, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("R")) {
-							moverPrimeraTorre(columna, f, false);
+							moverSegundaTorre(columna, f, false);
 						}
 					} else {
 						if (tablero[f][columna].getPieza().equals("k")) {
-							moverRey(columna, false, f);
+							moverRey(f, false, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("r")) {
 							moverSegundaTorre(columna, f, false);
@@ -109,10 +101,10 @@ public class GestorMoviminetos {
 				case "O-O-O":
 					if (turno) {
 						if (tablero[f][columna].getPieza().equals("K")) {
-							moverRey(columna, true, f);
+							moverRey(f, true, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("R")) {
-							moverSegundaTorre(columna, f, true);
+							moverPrimeraTorre(columna, f, true);
 						}
 					} else {
 						if (tablero[f][columna].getPieza().equals("k")) {
@@ -196,37 +188,23 @@ public class GestorMoviminetos {
 	}
 
 	public Pieza enroqueRey(boolean esLargo, Pieza rey) {
-		if (turno) {
-			if (esLargo) {
-				rey.setColumna(6);
-			} else {
-				rey.setColumna(1);
-			}
+
+		if (esLargo) {
+			rey.setColumna(2);
 		} else {
-			if (esLargo) {
-				rey.setColumna(1);
-			} else {
-				rey.setColumna(6);
-			}
+			rey.setColumna(6);
 		}
+
 		seMueve = true;
 		return rey;
 	}
 
 	public Pieza enroqueTorre(boolean esLargo, Pieza torre) {
 
-		if (turno) {
-			if (esLargo) {
-				torre.setColumna(5);
-			} else {
-				torre.setColumna(2);
-			}
+		if (esLargo) {
+			torre.setColumna(3);
 		} else {
-			if (esLargo) {
-				torre.setColumna(2);
-			} else {
-				torre.setColumna(5);
-			}
+			torre.setColumna(5);
 		}
 
 		seMueve = true;
