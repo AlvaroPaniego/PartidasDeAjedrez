@@ -26,16 +26,26 @@ public class FiltradorMoviminetos {
 	
 	public char cogeFila(String movimiento) {
 		char fila = movimiento.charAt(0);
-		if(movimiento.length() > 2) {
+		if(movimiento.length() == 3) {
 			fila = movimiento.charAt(1);
+			
+		}else if(movimiento.length() == 4) {
+			fila = movimiento.charAt(2);
 		}
 		return fila;
 	}
 	
+	public char cogeFilaInicial(String movimiento) {
+		return movimiento.charAt(1);
+	}
+	
 	public int cogeColumna(String movimiento) {
 		int columna = -1;
-		if(movimiento.length() > 2) {
+		if(movimiento.length() == 3) {
 			columna = Integer.parseInt(movimiento.charAt(2)+"");
+			
+		}else if(movimiento.length() == 4) {
+			columna = Integer.parseInt(movimiento.charAt(3)+"");
 		}else {
 			columna = Integer.parseInt(movimiento.charAt(1)+"");
 		}

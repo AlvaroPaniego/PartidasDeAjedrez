@@ -44,13 +44,15 @@ public class PrincipalAjedrez {
 		while(!partidaTerminada && i < turnos) {
 			jugadas = partida.getMovimientos().get(i).split(" ");
 			if(jugadas.length < 1) {
+				System.out.println("¡Tablas!");
 				break;
 			}
 			if(turno) {
-				movimientos(gm, c, fm, jugadas[0], p);
+				partidaTerminada = movimientos(gm, c, fm, jugadas[0], p, partidaTerminada);
+				System.out.println(partidaTerminada);
 				turno = !turno;
 			}else {
-				movimientos(gm, c, fm, jugadas[1], p);
+				partidaTerminada = movimientos(gm, c, fm, jugadas[1], p, partidaTerminada);
 				turno = !turno;
 				i++;
 			}
@@ -58,18 +60,34 @@ public class PrincipalAjedrez {
 		}
 	}
 
-	private static void movimientos(GestorMoviminetos gm, Consola c, FiltradorMoviminetos fm, String jugadas, Pattern patronColumnas) {
+	private static boolean movimientos(GestorMoviminetos gm, Consola c, FiltradorMoviminetos fm, String jugadas, Pattern patronColumnas, boolean partidaTerminada) {
 		int columna;
 		String pieza;
-		char fila;
+		char fila, filaInicial;
 		System.out.println(jugadas);
 		if(!jugadas.contains("O")) {
+			if(jugadas.contains("+")) {
+				System.out.println("¡Jaque!");
+				jugadas = jugadas.substring(0, jugadas.length() - 1);
+			}
+			if(jugadas.contains("#")) {
+				System.out.println("¡Jaque Mate!");
+				jugadas = jugadas.substring(0, jugadas.length() - 1);
+				partidaTerminada = true;
+			}
 			pieza = fm.cogePieza(jugadas);
 			fila = fm.cogeFila(jugadas);
 			columna = fm.cogeColumna(jugadas);
 			if(patronColumnas.matcher(pieza).matches()) {
-				c.mostrarTablero(gm.peonCaptura("", fila, columna, pieza.charAt(0)));;
-				return;
+				filaInicial = fm.cogeFilaInicial(jugadas);
+				if(jugadas.length() == 3) {
+					System.out.println(fila + " " + columna + " " + pieza.charAt(0));
+					c.mostrarTablero(gm.peonCaptura("", fila, columna, pieza.charAt(0)));;
+					return partidaTerminada;
+				}else {
+					c.mostrarTablero(gm.peonCaptura(pieza, fila, columna, filaInicial));
+					return partidaTerminada;
+				}
 			}
 		}else {
 			pieza = jugadas;
@@ -78,6 +96,7 @@ public class PrincipalAjedrez {
 		}
 		System.out.println(pieza + " " +fila + " " + columna);
 		c.mostrarTablero(gm.moverPieza(pieza, fila, columna));
+		return partidaTerminada;
 	}
 	
 	private static void pasarTurno(Scanner scanner) {
