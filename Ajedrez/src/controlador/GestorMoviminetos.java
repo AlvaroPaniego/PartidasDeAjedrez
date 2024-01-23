@@ -24,7 +24,7 @@ public class GestorMoviminetos {
 		this.tablero = tablero;
 	}
 
-	public Pieza[][] peonCaptura(String pieza, char columnaFinal, int filaFinal, char columnaInicial) {
+	public Pieza[][] moverPiezaEspecifica(String pieza, char columnaFinal, int filaFinal, char columnaInicial) {
 		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
@@ -87,14 +87,14 @@ public class GestorMoviminetos {
 							moverRey(f, false, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("R")) {
-							moverSegundaTorre(columna, f, false);
+							moverSegundaTorre(f, columna, false);
 						}
 					} else {
 						if (tablero[f][columna].getPieza().equals("k")) {
 							moverRey(f, false, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("r")) {
-							moverSegundaTorre(columna, f, false);
+							moverSegundaTorre(f, columna, false);
 						}
 					}
 					break;
@@ -104,14 +104,14 @@ public class GestorMoviminetos {
 							moverRey(f, true, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("R")) {
-							moverPrimeraTorre(columna, f, true);
+							moverPrimeraTorre(f, columna, true);
 						}
 					} else {
 						if (tablero[f][columna].getPieza().equals("k")) {
-							moverRey(columna, true, f);
+							moverRey(f, true, columna);
 						}
 						if (tablero[f][columna].getPieza().equals("r")) {
-							moverPrimeraTorre(columna, f, true);
+							moverPrimeraTorre(f, columna, true);
 						}
 					}
 					break;

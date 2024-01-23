@@ -45,7 +45,7 @@ public class PrincipalAjedrez {
 			jugadas = partida.getMovimientos().get(i).split(" ");
 			if(jugadas.length < 1) {
 				System.out.println("¡Tablas!");
-				break;
+				partidaTerminada = true;
 			}
 			if(turno) {
 				partidaTerminada = movimientos(gm, c, fm, jugadas[0], p, partidaTerminada);
@@ -78,14 +78,14 @@ public class PrincipalAjedrez {
 			pieza = fm.cogePieza(jugadas);
 			fila = fm.cogeFila(jugadas);
 			columna = fm.cogeColumna(jugadas);
-			if(patronColumnas.matcher(pieza).matches()) {
+			if(patronColumnas.matcher(pieza).matches() || jugadas.length() == 4) {
 				filaInicial = fm.cogeFilaInicial(jugadas);
 				if(jugadas.length() == 3) {
 					System.out.println(fila + " " + columna + " " + pieza.charAt(0));
-					c.mostrarTablero(gm.peonCaptura("", fila, columna, pieza.charAt(0)));;
+					c.mostrarTablero(gm.moverPiezaEspecifica("", fila, columna, pieza.charAt(0)));;
 					return partidaTerminada;
 				}else {
-					c.mostrarTablero(gm.peonCaptura(pieza, fila, columna, filaInicial));
+					c.mostrarTablero(gm.moverPiezaEspecifica(pieza, fila, columna, filaInicial));
 					return partidaTerminada;
 				}
 			}

@@ -9,7 +9,11 @@ public class FiltradorMoviminetos {
 		for (String movimiento : arrLMovimientos) {
 			if(movimiento.contains("x")) {
 				movimientoSinX = movimiento.split("x");
-				movimiento = movimientoSinX[0] + movimientoSinX[1];
+				if(movimientoSinX.length > 2) {
+					movimiento = movimientoSinX[0] + movimientoSinX[1] + movimientoSinX[2];
+				}else {
+					movimiento = movimientoSinX[0] + movimientoSinX[1];
+				}
 			}
 			arrLMovimientosFiltrados.add(movimiento);
 		}
