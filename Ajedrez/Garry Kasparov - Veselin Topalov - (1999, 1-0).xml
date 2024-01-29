@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><partidas>
+    <partida numero="3">
+        <jugadores>Garry Kasparov - Veselin Topalov - (1999, 1-0)</jugadores>
+        <movimiento n="1">e4 d6</movimiento>
+        <movimiento n="2">d4 Nf6</movimiento>
+        <movimiento n="3">Nc3 g6</movimiento>
+        <movimiento n="4">Be3 Bg7</movimiento>
+        <movimiento n="5">Qd2 c6</movimiento>
+        <movimiento n="6">f3 b5</movimiento>
+        <movimiento n="7">Nge2 Nbd7</movimiento>
+        <movimiento n="8">Bh6 Bxh6</movimiento>
+        <movimiento n="9">Qxh6 Bb7</movimiento>
+        <movimiento n="10">a3 e5</movimiento>
+        <movimiento n="11">O-O-O Qe7</movimiento>
+        <movimiento n="12">Kb1 a6</movimiento>
+        <movimiento n="13">Nc1 O-O-O</movimiento>
+        <movimiento n="14">Nb3 exd4</movimiento>
+        <movimiento n="15">Rxd4 c5</movimiento>
+        <movimiento n="16">Rd1 Nb6</movimiento>
+        <movimiento n="17">g3 Kb8</movimiento>
+        <movimiento n="18">Na5 Ba8</movimiento>
+        <movimiento n="19">Bh3 d5</movimiento>
+        <movimiento n="20">Qf4+ Ka7</movimiento>
+        <movimiento n="21">Rhe1 d4</movimiento>
+        <movimiento n="22">Nd5 Nbxd5</movimiento>
+        <movimiento n="23">exd5 Qd6</movimiento>
+        <movimiento n="24">Rxd4 cxd4</movimiento>
+        <movimiento n="25">Re7+ Kb6</movimiento>
+        <movimiento n="26">Qxd4+ Kxa5</movimiento>
+        <movimiento n="27">b4+ Ka4</movimiento>
+        <movimiento n="28">Qc3 Qxd5</movimiento>
+        <movimiento n="29">Ra7 Bb7</movimiento>
+        <movimiento n="30">Rxb7 Qc4</movimiento>
+        <movimiento n="31">Qxf6 Kxa3</movimiento>
+        <movimiento n="32">Qxa6+ Kxb4</movimiento>
+        <movimiento n="33">c3+ Kxc3</movimiento>
+        <movimiento n="34">Qa1+ Kd2</movimiento>
+        <movimiento n="35">Qb2+ Kd1</movimiento>
+        <movimiento n="36">Bf1 Rd2</movimiento>
+        <movimiento n="37">Rd7 Rxd7</movimiento>
+        <movimiento n="38">Bxc4 bxc4</movimiento>
+        <movimiento n="39">Qxh8 Rd3</movimiento>
+        <movimiento n="40">Qa8 c3</movimiento>
+        <movimiento n="41">Qa4+ Ke1</movimiento>
+        <movimiento n="42">f4 f5</movimiento>
+        <movimiento n="43">Kc1 Rd2</movimiento>
+        <movimiento n="44">Qa7</movimiento>
+    </partida>
+</partidas>

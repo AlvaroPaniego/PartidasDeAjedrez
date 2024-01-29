@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><partidas>
+    <partida numero="1">
+        <jugadores>Reti - Tartakower</jugadores>
+        <movimiento n="1">e4 c6</movimiento>
+        <movimiento n="2">d4 d5</movimiento>
+        <movimiento n="3">Nc3 dxe4</movimiento>
+        <movimiento n="4">Nxe4 Nf6</movimiento>
+        <movimiento n="5">Qd3 e5</movimiento>
+        <movimiento n="6">dxe5 Qa5+</movimiento>
+        <movimiento n="7">Bd2 Qxe5</movimiento>
+        <movimiento n="8">O-O-O Nxe4</movimiento>
+        <movimiento n="9">Qd8+ Kxd8</movimiento>
+        <movimiento n="10">Bg5+ Kc7</movimiento>
+        <movimiento n="11">Bd8#</movimiento>
+    </partida>
+</partidas>
