@@ -30,6 +30,7 @@ public class PrincipalAjedrez {
 			case 1:
 				arrLFichero = c.cogePartidas();
 				System.out.println("Introduce el numero de la partida");
+				partidaSeleccionada = scanner.nextInt();
 				if(partidaSeleccionada <= arrLFichero.size() && partidaSeleccionada != 0) {
 					partida = lp.lectorPartidas(partidaSeleccionada);
 					verPartida(scanner, tablero, gm, c, fm, p, partida);

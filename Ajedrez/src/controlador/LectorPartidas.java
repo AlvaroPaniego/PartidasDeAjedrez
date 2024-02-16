@@ -16,7 +16,9 @@ public class LectorPartidas {
 		Partida partida = new Partida();
 		String linea, jugadores;
 		try {
-			File archivoPartida = new File("partidas/Partida" + numPartida + ".txt");
+			String ficheroPartida = "partidas/Partida" + numPartida + ".txt";
+			System.out.println(ficheroPartida);
+			File archivoPartida = new File(ficheroPartida);
 			fr = new FileReader(archivoPartida);
 			bf = new BufferedReader(fr);
 			
