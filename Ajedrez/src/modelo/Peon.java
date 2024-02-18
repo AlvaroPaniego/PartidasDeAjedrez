@@ -13,18 +13,12 @@ public class Peon extends Pieza{
 	public Pieza mover(int fila, char columna, boolean capturar) {
 		//TODO Gestionar capturar en diagonal
 		Traductor traductor = new Traductor();
-		System.out.println("Estoy moviendo un peon");
 		int columnaInt = traductor.charToInt(columna);
 		int v1 = fila - super.getFila(), v2 = columnaInt - super.getColumna();
-//		System.out.println("fila " + fila + " columna " + "(" + columna + ")" + columnaInt);
-//		System.out.println("fila OG " + getFila() + " columna OG "  + getColumna());
 		boolean vertical1 = Math.abs(v1) == 1 && super.getColumna() == columnaInt;
 		boolean vertical2 = Math.abs(v1) == 2 && super.getColumna() == columnaInt;
 		boolean diagonal = Math.abs(v1) == Math.abs(v2);
-//		System.out.println(v1 + " " + v2);
-//		System.out.println("vertical " + vertical1+ " diagonal " + diagonal);
 		if(vertical1 || (vertical2 && primerMovimiento) || (diagonal && capturar)) {
-			System.out.println("Se puede mover");
 			primerMovimiento = false;
 			super.setFila(fila);
 			super.setColumna(columnaInt);

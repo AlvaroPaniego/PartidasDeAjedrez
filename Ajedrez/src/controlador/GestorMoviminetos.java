@@ -25,34 +25,24 @@ public class GestorMoviminetos {
 	}
 
 	public Pieza[][] moverPiezaEspecifica(String pieza, char columnaFinal, int filaFinal, char columnaInicial) {
-		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
 		int columnaFinalComparar = tr.charToInt(columnaFinal), columnaInicialComparar = tr.charToInt(columnaInicial);
 		seMueve = false;
 		String piezaMover = elegirPieza(pieza);
 		for (int fila = tablero.length - 1; fila >= 0; fila--) {
-			System.out.println(tablero[fila][columnaInicialComparar].getPieza());
 			if (tablero[fila][columnaInicialComparar].getPieza().equals(piezaMover)) {
-				System.out.println("igual se mueve");
 				piezaAMover = tablero[fila][columnaInicialComparar].mover(filaFinal - 1, columnaFinal, true);
 				if (piezaAMover != null) {
-					System.out.println("se puede mover");
-					System.out.println(fila + " " + columnaFinalComparar);
 					tablero[fila][columnaInicialComparar] = new Vacio("_", fila, columnaInicialComparar);
-					System.out.println(tablero[fila][columnaInicialComparar].getPieza());
 					tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
-					System.out.println(piezaAMover.getFila() + " " + piezaAMover.getColumna());
-					System.out.println(tablero[piezaAMover.getFila()][piezaAMover.getColumna()].getPieza());
 					seMueve = true;
 					turno = !turno;
-					System.out.println("Final mover pieza " + turno);
 					return tablero;
 				}
 			}
 		}
 		turno = !turno;
-		System.out.println("Final mover pieza " + turno);
 		if (!seMueve) {
 			System.out.println(Colores.RED + "Jugada no valida" + Colores.RESET);
 		}
@@ -61,16 +51,12 @@ public class GestorMoviminetos {
 	}
 
 	public Pieza[][] moverPieza(String pieza, char columnaFinal, int filaFinal) {
-		System.out.println("Inicio mover pieza " + turno);
 		Traductor tr = new Traductor();
 		Pieza piezaAMover;
 		int columna;
 		seMueve = false;
 		boolean puedeCapturar;
 		String piezaMover = elegirPieza(pieza);
-//		if(tableroObj.retaguardiaOcupada(turno)) {
-//			System.out.println("No se puede hacer el enroque");
-//		}
 		if ((pieza.equals("O-O-O"))) {
 			saltarTorre = true;
 		} else {
@@ -117,16 +103,12 @@ public class GestorMoviminetos {
 					break;
 				default:
 					if (tablero[f][columna].getPieza().equals(piezaMover)) {
-//						columnaCapturar = tr.charToInt(columnaFinal);
-//						System.out.println(columnaCapturar);
-//						puedeCapturar = !(tablero[filaFinal][columnaCapturar - 1].getPieza().contains("_") && tablero[filaFinal][columnaCapturar + 1].getPieza().contains("_"));
 						piezaAMover = tablero[f][columna].mover(filaFinal - 1, columnaFinal, puedeCapturar);
 						if (piezaAMover != null) {
 							tablero[f][columna] = new Vacio("_", columna, f);
 							tablero[piezaAMover.getFila()][piezaAMover.getColumna()] = piezaAMover;
 							seMueve = true;
 							turno = !turno;
-							System.out.println("Final mover pieza " + turno);
 							return tablero;
 						}
 					}
@@ -134,7 +116,6 @@ public class GestorMoviminetos {
 			}
 		}
 		turno = !turno;
-		System.out.println("Final mover pieza " + turno);
 		if (!seMueve) {
 			System.out.println(Colores.RED + "Jugada no valida" + Colores.RESET);
 		}

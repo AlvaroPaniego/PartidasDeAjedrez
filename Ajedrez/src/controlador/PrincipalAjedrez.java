@@ -12,7 +12,6 @@ import vista.Consola;
 
 public class PrincipalAjedrez {
 	public static void main(String[] args) {
-		HashMap<Integer, Tablero> mapaMovimiento = new HashMap<>();
 		ArrayList<String> arrLFichero = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
 		Tablero tablero = new Tablero();
@@ -67,6 +66,7 @@ public class PrincipalAjedrez {
 		c.mostrarTablero(tablero.getTablero());
 		String[] jugadas;
 		while (!partidaTerminada && i < turnos) {
+			System.out.println("===============================================");
 			jugadas = partida.getMovimientos().get(i).split(" ");
 			if (jugadas.length < 2) {
 				System.out.println("¡Tablas!");
@@ -74,7 +74,6 @@ public class PrincipalAjedrez {
 			}
 			if (turno) {
 				partidaTerminada = movimientos(gm, c, fm, jugadas[0], p, partidaTerminada);
-				System.out.println(partidaTerminada);
 				turno = !turno;
 			} else {
 				partidaTerminada = movimientos(gm, c, fm, jugadas[1], p, partidaTerminada);
@@ -90,7 +89,6 @@ public class PrincipalAjedrez {
 		int columna;
 		String pieza;
 		char fila, filaInicial;
-		System.out.println(jugadas);
 		if (!jugadas.contains("O")) {
 			if (jugadas.contains("+")) {
 				System.out.println("¡Jaque!");
@@ -107,9 +105,7 @@ public class PrincipalAjedrez {
 			if (patronColumnas.matcher(pieza).matches() || jugadas.length() == 4) {
 				filaInicial = fm.cogeFilaInicial(jugadas);
 				if (jugadas.length() == 3) {
-					System.out.println(fila + " " + columna + " " + pieza.charAt(0));
 					c.mostrarTablero(gm.moverPiezaEspecifica("", fila, columna, pieza.charAt(0)));
-					;
 					return partidaTerminada;
 				} else {
 					c.mostrarTablero(gm.moverPiezaEspecifica(pieza, fila, columna, filaInicial));
@@ -121,7 +117,6 @@ public class PrincipalAjedrez {
 			fila = 'i';
 			columna = -1;
 		}
-		System.out.println(pieza + " " + fila + " " + columna);
 		c.mostrarTablero(gm.moverPieza(pieza, fila, columna));
 		return partidaTerminada;
 	}

@@ -7,7 +7,7 @@ public class Vacio extends Pieza{
 	}
 	@Override
 	public Pieza mover(int fila, char columna, boolean capturar) {
-		System.out.println("Aqui, aqui, aqui, aqui no hay quien viva");
+		System.out.println("No hay ninguna pieza en esta casilla.");
 		return null;
 	}
 }

@@ -13,9 +13,7 @@ public class Torre extends Pieza {
 		Traductor traductor = new Traductor();
 		int columnaInt = traductor.charToInt(columna);
 		boolean mover = super.getFila() == fila || super.getColumna() == columnaInt;
-		System.out.println("Estoy moviendo una torre");
 		if(mover) {
-			System.out.println("Se puede mover");
 			super.setFila(fila);
 			super.setColumna(columnaInt);
 			
